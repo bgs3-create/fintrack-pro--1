@@ -23,7 +23,6 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
   if (!auth) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   const account = await prisma.account.findFirst({ where: { id: params.id, userId: auth.userId } })
   if (!account) return NextResponse.json({ error: 'Tidak ditemukan' }, { status: 404 })
-  if (account.isDefault) return NextResponse.json({ error: 'Akun default tidak bisa dihapus' }, { status: 400 })
   await prisma.account.delete({ where: { id: params.id } })
   return NextResponse.json({ success: true })
 }
