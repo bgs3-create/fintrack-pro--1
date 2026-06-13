@@ -1,0 +1,114 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String        @id @default(cuid())
+  name         String
+  email        String        @unique
+  password     String
+  avatar       String?
+  currency     String        @default("IDR")
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  transactions Transaction[]
+  categories   Category[]
+  budgets      Budget[]
+  accounts     Account[]
+  savingGoals  SavingGoal[]
+  activityLogs ActivityLog[]
+}
+
+model Account {
+  id           String        @id @default(cuid())
+  name         String
+  type         String        // kas, bank, ewallet, custom
+  balance      Float         @default(0)
+  color        String        @default("#6366f1")
+  icon         String        @default("wallet")
+  isDefault    Boolean       @default(false)
+  userId       String
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  transactions Transaction[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model Category {
+  id           String        @id @default(cuid())
+  name         String
+  type         String        // income, expense, both
+  icon         String        @default("tag")
+  color        String        @default("#6366f1")
+  isDefault    Boolean       @default(false)
+  userId       String
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  transactions Transaction[]
+  budgets      Budget[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model Transaction {
+  id          String    @id @default(cuid())
+  type        String    // income, expense
+  amount      Float
+  description String
+  note        String?
+  imageUrl    String?
+  date        DateTime  @default(now())
+  userId      String
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  categoryId  String
+  category    Category  @relation(fields: [categoryId], references: [id])
+  accountId   String
+  account     Account   @relation(fields: [accountId], references: [id])
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Budget {
+  id         String   @id @default(cuid())
+  name       String
+  amount     Float
+  spent      Float    @default(0)
+  month      Int
+  year       Int
+  alertAt    Float    @default(80)
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id])
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model SavingGoal {
+  id          String   @id @default(cuid())
+  name        String
+  targetAmount Float
+  currentAmount Float  @default(0)
+  deadline    DateTime?
+  icon        String   @default("piggy-bank")
+  color       String   @default("#10b981")
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ActivityLog {
+  id        String   @id @default(cuid())
+  action    String
+  entity    String
+  entityId  String
+  details   String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+}
