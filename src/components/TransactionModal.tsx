@@ -44,7 +44,7 @@ export function TransactionModal({ type = 'income', transaction, onClose, onSucc
       setAccounts(accs)
       if (!form.categoryId && cats.length > 0) setForm(f => ({ ...f, categoryId: cats[0].id }))
       if (!form.accountId && accs.length > 0) {
-        const def = accs.find((a: Account) => a.isDefault) || accs[0]
+        const def = accs[0]
         setForm(f => ({ ...f, accountId: def.id }))
       }
     })
