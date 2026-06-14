@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: 'FinTrack Pro — Kelola Keuangan dengan Cerdas',
   description: 'Aplikasi pembukuan keuangan modern untuk individu dan bisnis kecil',
   manifest: '/manifest.json',
-  icons: { icon: '/favicon.ico' },
+ // icons: { icon: '/favicon.ico' },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
