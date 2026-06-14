@@ -151,15 +151,7 @@ Perintah ini akan otomatis: install deps → generate prisma → push DB → see
 
 ---
 
-## 📋 Environment Variables (.env)
 
-```env
-DATABASE_URL="file:./dev.db"
-NEXTAUTH_SECRET="fintrack-super-secret-key-2024-change-in-production"
-NEXTAUTH_URL="http://localhost:3000"
-JWT_SECRET="fintrack-jwt-secret-key-2024"
-NEXT_PUBLIC_APP_NAME="FinTrack Pro"
-NEXT_PUBLIC_APP_URL="http://localhost:3000"
 ```
 
 > ⚠️ **Ganti JWT_SECRET & NEXTAUTH_SECRET** dengan string random panjang sebelum deploy ke production!
