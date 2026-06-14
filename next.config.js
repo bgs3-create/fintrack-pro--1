@@ -1,17 +1,10 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  experimental: {
-    serverComponentsExternalPackages: ['@prisma/client', 'bcryptjs', 'pdfkit'],
-  },
-  images: {
-    remotePatterns: {
-      protocol: [],
-    },
-  },
-  webpack: (config) => {
-    config.resolve.alias.canvas = false
-    return config
-  },
-}
-
-module.exports = nextConfig
+const nextConfig = {images:
+                    {remoteRatterns:[],
+                    },
+                  webpack: (config)=>{
+                    config.rosolve.alias.canvas=false
+                    return config
+                  },
+                   }
+module.exports=nextConfig
