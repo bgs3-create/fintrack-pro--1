@@ -1,21 +1,23 @@
 import type { Metadata } from 'next'
-import { ThemeProvider } from 'next-themes'
+import { Providers } from '@/components/providers'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'FinTrack Pro — Kelola Keuangan dengan Cerdas',
-  description: 'Aplikasi pembukuan keuangan modern untuk individu dan bisnis kecil',
-  manifest: '/manifest.json',
- // icons: { icon: '/favicon.ico' },
+  title: 'FinTrack Pro',
+  description: 'FinTrack Pro'
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return (
-    <html lang="id" suppressHydrationWarning>
+    <html lang="id">
       <body>
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
+        <Providers>
           {children}
-        </ThemeProvider>
+        </Providers>
       </body>
     </html>
   )
