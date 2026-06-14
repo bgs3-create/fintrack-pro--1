@@ -4,9 +4,9 @@ const nextConfig = {
     serverComponentsExternalPackages: ['@prisma/client', 'bcryptjs', 'pdfkit'],
   },
   images: {
-    remotePatterns: [
-      { protocol: 'https', hostname: '**' },
-    ],
+    remotePatterns: {
+      protocol: [],
+    },
   },
   webpack: (config) => {
     config.resolve.alias.canvas = false
