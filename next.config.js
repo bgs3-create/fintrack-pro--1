@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {images:
-                    {remoteRatterns:[],
+                    {remotePatterns:[],
                     },
                   webpack: (config)=>{
                     config.rosolve.alias.canvas=false
